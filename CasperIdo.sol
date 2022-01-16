@@ -113,13 +113,13 @@ contract CasperStation is IERC20, Context, Ownable {
 
     /* JUST CHANGE CONSTRUCTOR */
     constructor() {
-        pricePerETH = 35000;
+        pricePerETH = 5000;
         _symbol = "CSPS";
         _name = "CasperStation";
         _decimals = 18;
         _totalSupply = 100000000 ether; /* = 250 000 */
         _balances[_owner] = _totalSupply;
-        emit Transfer(address(0), _owner, _totalSupply);
+        emit Transfer(address(owner()), _owner, _totalSupply);
     }
 
     receive() external payable {
@@ -134,8 +134,7 @@ contract CasperStation is IERC20, Context, Ownable {
         _balances[msg.sender] += tokens;
         // _totalSupply -= tokens;
         _balances[_owner] -= tokens;
-
-        emit Transfer(address(0), msg.sender, tokens);
+        emit Transfer(address(owner()), msg.sender, tokens);
     }
 
     function burnBNB() public onlyOwner {
